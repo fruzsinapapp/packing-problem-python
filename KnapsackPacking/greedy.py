@@ -165,7 +165,7 @@ def solve_problem(problem, greedy_score_function=get_weighted_sum_of_item_value_
                 # if solution.add_item(item_index, (random.uniform(min_x, max_x), random.uniform(min_y, max_y)), random.uniform(0, 360)):
                 #if solution.add_item(item_index, (random.uniform(min_x, max_x), random.uniform(min_y, max_y))):
 
-                if solution.add_item(item_index, (random.uniform(min_x, max_x), random.uniform(min_y, 1.5))):
+                if solution.add_item(item_index, (random.uniform(min_x, max_x), random.uniform(min_y, max_y))):
                     # the item to place first is assumed to have been placed, if there was any
                     item_index_to_place_first = -1
                     check = solution.problem.items[item_index]
