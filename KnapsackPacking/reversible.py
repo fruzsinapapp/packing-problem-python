@@ -109,7 +109,7 @@ def solve_problem(problem, max_iter_num=MAX_ITER_NUM, max_iter_num_without_addin
 
             # try to add the item in a random position and with a random rotation; if it is valid, remove the item from the pending list
             #if solution.add_item(item_index, (random.uniform(min_x, max_x), random.uniform(min_y, max_y)), random.uniform(0, 360)):
-            if solution.add_item(item_index, (random.uniform(min_x, 1.5), random.uniform(min_y, max_y))):
+            if solution.add_item(item_index, (random.uniform(min_x, max_x), random.uniform(min_y, max_y))):
                 if calculate_times:
                     addition_time += get_time_since(start_time)
 

@@ -61,11 +61,6 @@ def generate_polygons(contours, hierarchy):
     return polygons
 
 
-
-
-
-
-
 def create_knapsack_packing_problems_with_manual_solutions(can_print=False):
 
     """Create a set of Knapsack-Packing problem instances that are solved (optimally) with manual placements (using actions available for all the algorithms); both the problems and solutions are returned"""
@@ -89,44 +84,6 @@ def create_knapsack_packing_problems_with_manual_solutions(can_print=False):
     print(type(p))
 
 
-
-
-
-
-
-
-
-
-    """
-    # Problem 1
-    max_weight = 150.
-
-
-    container_shape = MultiPolygon([(((0., 0.), (5., 0.), (5., 5.), (0., 5.)),
-                                     [((0.7, 0.7), (1.5, 0.7), (1.5, 1.5), (0.7, 1.5)),
-                                      ((2.4, 0.3), (4.3, 0.3), (4.3, 4.3), (2.4, 4.3)),
-                                      ((0.7, 2.7), (1.5, 2.7), (1.5, 3.5), (0.7, 3.5))])])
-
-    container = Container(max_weight, container_shape)
-
-    items = [Item(Polygon([(0., 0.), (.5, 0.), (.5, 0.5), (0., 0.5)]), 2., 1.),
-             Item(Polygon([(0., 0.), (.5, 0.), (.5, 0.5), (0., 0.5)]), 2., 1.),
-             Item(Polygon([(0., 0.), (.5, 0.), (.5, 0.5), (0., 0.5)]), 2., 1.),
-             Item(Polygon([(0., 0.), (.5, 0.), (.5, 0.5), (0., 0.5)]), 2., 1.),
-             Item(Polygon([(0., 0.), (.5, 0.), (.5, 0.5), (0., 0.5)]), 2., 1.),
-             Item(Polygon([(0., 0.), (.5, 0.), (.5, 0.5), (0., 0.5)]), 2., 1.),
-             Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.45), (0., 0.45)]), 20., 30.),
-             Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.45), (0., 0.45)]), 20., 30.),
-             #Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.1), (0., 0.1)]), 5., 25.),
-             #Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.1), (0., 0.1)]), 5., 25.)
-             ]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-    """
-
     # Problem 2
     max_weight = 150.
     #container_shape = Polygon([(0., 0.), (5., 0.), (5., 5.), (0., 5.)])
@@ -141,8 +98,22 @@ def create_knapsack_packing_problems_with_manual_solutions(can_print=False):
 
 
 
-    items = [Item(Polygon([(0., 0.), (35., 0.), (35., 2.), (0., 2.)]), 1., 1.),
-             Item(Polygon([(0., 0.), (35., 0.), (35., 2.), (0., 2.)]), 1., 1.),
+    items = [Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.)
              #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
              #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
              #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
@@ -164,360 +135,10 @@ def create_knapsack_packing_problems_with_manual_solutions(can_print=False):
     solutions.append(solution)
 
 
-
     elapsed_time = get_time_since(start_time)
     print_if_allowed("Manual elapsed time: {} ms".format(round(elapsed_time, 3)), can_print)
 
     return problems, [str(i + 1) for i in range(len(problems))], solutions
-
-"""
-    max_weight = 120.
-    container_shape = Circle((3.3, 3.3), 3.3)
-    container = Container(max_weight, container_shape)
-    items = [Item(Polygon([(0, 0), (0, 4.5), (4.5, 4.5), (4.5, 0)]), 40., 50.),
-             Item(Circle((0, 0), 0.45), 20., 5.),
-             Item(Circle((0, 0), 0.45), 20., 10.),
-             Item(Circle((0, 0), 0.45), 20., 15.),
-             Item(Circle((0, 0), 0.45), 20., 20.)]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-
-    print_if_allowed(solution.add_item(0, (3.3, 3.3), 0.), can_print)
-    print_if_allowed(solution.add_item(1, (3.3, 6.05), 0.), can_print)
-    print_if_allowed(solution.add_item(2, (3.3, 0.55), 0.), can_print)
-    print_if_allowed(solution.add_item(3, (6.05, 3.3), 0.), can_print)
-    print_if_allowed(solution.add_item(4, (0.55, 3.3), 0.), can_print)
-
-
-
-
-"""
-    # Problem 2
-"""
-    max_weight = 100.
-    container_shape = Point(5, 5).buffer(5, 4)
-    container = Container(max_weight, container_shape)
-    items = [Item(MultiPolygon([(Point(5, 5).buffer(4.7, 4).exterior.coords,
-                                 [tuple(Point(5, 5).buffer(4, 4).exterior.coords)])]), 10., 25.),
-             Item(MultiPolygon([(Point(5, 5).buffer(3.7, 4).exterior.coords,
-                                 [tuple(Point(5, 5).buffer(3, 4).exterior.coords)])]), 10., 15.),
-             Item(MultiPolygon([(Point(5, 5).buffer(2.7, 4).exterior.coords,
-                                 [tuple(Point(5, 5).buffer(2, 4).exterior.coords)])]), 10., 20.),
-             Item(MultiPolygon([(Point(5, 5).buffer(1.7, 4).exterior.coords,
-                                 [tuple(Point(5, 5).buffer(1, 4).exterior.coords)])]), 20., 20.),
-             Item(Circle((0., 0.), 0.7), 20., 10)]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-
-    print_if_allowed(solution.add_item(0, (5., 5.), 0.), can_print)
-    print_if_allowed(solution.add_item(1, (5., 5.), 0.), can_print)
-    print_if_allowed(solution.add_item(2, (5., 5.), 0.), can_print)
-    print_if_allowed(solution.add_item(3, (5., 5.), 0.), can_print)
-    print_if_allowed(solution.add_item(4, (5., 5.), 0.), can_print)
-"""
-    # Problem 3
-"""
-    max_weight = 32.
-    container_shape = Polygon([(0, 0), (0, 10), (10, 10), (10, 0)])
-    container = Container(max_weight, container_shape)
-    items = [Item(Polygon([(0, 0), (0, 6.), (6., 0)]), 10., 20.),
-             Item(Polygon([(0, 0), (0, 6.), (6., 0)]), 10., 10.),
-             Item(Ellipse((0, 0), 1.5, 0.3), 10., 5.),
-             Item(Ellipse((0, 0), 3, 0.3), 5., 5.),
-             Item(Ellipse((0, 0), 1.5, 0.3), 5., 5.),
-             Item(Ellipse((0, 0), 3, 0.3), 10., 5.)]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-
-    print_if_allowed(solution.add_item(0, (4.99, 5), 0.), can_print)
-    print_if_allowed(solution.add_item(1, (5.01, 5), 180.), can_print)
-    print_if_allowed(solution.add_item(3, (5., 1.65), 0), can_print)
-    print_if_allowed(solution.add_item(4, (5., 8.35), 0), can_print)
-"""
-    # Problem 4
-"""
-    max_weight = 50.
-    container_shape = Ellipse((3., 2.), 3., 2.)
-    container = Container(max_weight, container_shape)
-    items = [Item(Ellipse((0., 0.), 0.7, 0.5), 5., 7),
-             Item(Ellipse((0., 0.), 0.3, 0.1), 7., 2),
-             Item(Ellipse((0., 0.), 0.2, 0.4), 8., 4),
-             Item(Ellipse((0., 0.), 0.5, 0.3), 3., 5),
-             Item(Circle((0., 0.), 0.4), 4., 5),
-             Item(Circle((0., 0.), 0.25), 3., 2),
-             Item(Circle((0., 0.), 0.2), 9., 5),
-             Item(Circle((0., 0.), 0.1), 4., 3.),
-             Item(Circle((0., 0.), 0.7), 9., 3.)]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-
-    print_if_allowed(solution.add_item(0, (3., 1.94), 0.), can_print)
-    print_if_allowed(solution.add_item(2, (3., 3.24), 90.), can_print)
-    print_if_allowed(solution.add_item(3, (3., 2.74), 0.), can_print)
-    print_if_allowed(solution.add_item(4, (2.25, 3.5), 0.), can_print)
-    print_if_allowed(solution.add_item(5, (3., 3.71), 0.), can_print)
-    print_if_allowed(solution.add_item(6, (3.46, 3.75), 0.), can_print)
-    print_if_allowed(solution.add_item(7, (3.44, 3.43), 0.), can_print)
-    print_if_allowed(solution.add_item(8, (3., 0.72), 0.), can_print)
-"""
-    # Problem 5
-"""
-    max_weight = 100.
-    container_shape = MultiPolygon([(((0, 0), (0.5, 3), (0, 5), (5, 4.5), (5, 0)),
-                                     [((0.1, 0.1), (0.1, 0.2), (0.2, 0.2), (0.2, 0.1)),
-                                      ((0.3, 0.3), (0.3, 1.2), (1.6, 2.9), (0.75, 0.4)),
-                                      ((3.1, 1.5), (3.5, 4.5), (4.9, 4.4), (4.8, 1.2))])])
-    container = Container(max_weight, container_shape)
-    items = [Item(Polygon([(0, 0), (1, 1), (1, 0)]), 15., 32.),
-             Item(Polygon([(1, 2), (1.5, 3), (4, 5), (1, 4)]), 30., 100.),
-             Item(MultiPolygon([(((0.0, 0.0), (0.0, 1.0), (1.0, 1.0), (1.0, 0.0)),
-                                 [((0.1, 0.1), (0.1, 0.2), (0.2, 0.2), (0.2, 0.1)),
-                                  ((0.3, 0.3), (0.3, 0.6), (0.6, 0.6), (0.6, 0.4))])]), 12., 30.),
-             Item(Polygon([(0.1, 0.1), (0.1, 0.2), (0.2, 0.2)]), 10., 10.),
-             Item(MultiPolygon([(((0., 0.), (0., 1.4), (2., 1.3), (2., 0.)),
-                                 [((0.1, 0.1), (0.1, 0.15), (0.15, 0.15), (0.15, 0.1)),
-                                  ((0.2, 0.2), (0.2, 1.2), (1.8, 1.1), (1.8, 0.2))
-                                  ])]), 1., 5.),
-             Item(Circle((0., 0.), 0.4), 1., 14.),
-             Item(Circle((0., 0.), 0.1), 2., 12.),
-             Item(Ellipse((0., 0.), 0.5, 0.2), 3., 12.),
-             Item(Polygon([(0., 0.), (0., 0.3), (0.3, 0.3)]), 1., 10.),
-             Item(Ellipse((0., 0.), 0.8, 0.3), 10., 12.),
-             Item(Ellipse((0., 0.), 0.1, 0.05), 1., 2.),
-             # random items
-             # Item(shape_functions.create_random_polygon(0, 0, 0.8, 0.8, 10), 1., 5.),
-             # Item(shape_functions.create_random_triangle_in_rectangle_corner(0, 0, 0.8, 0.8), 1., 5.),
-             # Item(shape_functions.create_random_quadrilateral_in_rectangle_corners(0, 0, 0.8, 0.8), 1., 5.),
-             # out-items
-             Item(Circle((0., 0.), 0.2), 50., 1.),
-             ]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-
-    # solution.visualize()
-
-    # print(solution.add_item(0, (1.2, 0.5), 150.))
-    print_if_allowed(solution.add_item(0, (1.2, 0.5), 0.), can_print)
-    print_if_allowed(solution.add_item(1, (2., 3.), 0.), can_print)
-    print_if_allowed(solution.add_item(2, (2.5, 2.5), 0.), can_print)
-    print_if_allowed(solution.move_item_in_direction(2, (1, -1), evolutionary.MUTATION_MODIFY_MOVE_UNTIL_INTERSECTION_POINT_NUM, evolutionary.MUTATION_MODIFY_MOVE_UNTIL_INTERSECTION_MIN_DIST_PROPORTION, 9999), can_print)
-    print_if_allowed(solution.add_item(3, (2.5, 2.4), 0.), can_print)
-    print_if_allowed(solution.add_item(4, (3., 0.7), 0.), can_print)
-    print_if_allowed(solution.add_item(5, (3.03, 0.73), 0.), can_print)
-    print_if_allowed(solution.add_item(6, (3.45, 1.02), 0.), can_print)
-    print_if_allowed(solution.add_item(7, (3., 3.82), 45.), can_print)
-    print_if_allowed(solution.add_item(8, (2.4, 0.7), 0.), can_print)
-    print_if_allowed(solution.move_item(0, (0.29, 0)), can_print)
-    # print_if_allowed(solution.move_item_to(0, (1.49, 2.5)), can_print)
-    print_if_allowed(solution.rotate_item_to(0, 180.), can_print)
-    print_if_allowed(solution.rotate_item(0, 90.), can_print)
-    # print_if_allowed(solution.remove_item(0), can_print)
-    # print_if_allowed(solution.rotate_item(4, 20), can_print)
-    # print_if_allowed(solution.move_item(7, (1, 0)), can_print)
-    # print_if_allowed(solution.rotate_item(7, -45), can_print)
-    # print_if_allowed(solution.move_item(5, (-0.4, 0)), can_print)
-    print_if_allowed(solution.add_item(9, (1.2, 4.07), 15.), can_print)
-    print_if_allowed(solution.add_item(10, (3.6, 0.45), 30.), can_print)
-    # print_if_allowed(solution.add_item(11, (4.5, 0.5), 0.), can_print)
-"""
-    # Problem 6
-"""
-    max_weight = 150.
-    container_shape = MultiPolygon([(((0., 0.), (5., 0.), (5., 5.), (0., 5.)),
-                                     [((0.7, 0.7), (1.5, 0.7), (1.5, 1.5), (0.7, 1.5)),
-                                      ((2.4, 0.3), (4.3, 0.3), (4.3, 4.3), (2.4, 4.3)),
-                                      ((0.7, 2.7), (1.5, 2.7), (1.5, 3.5), (0.7, 3.5))])])
-    container = Container(max_weight, container_shape)
-    items = [Item(Polygon([(0., 0.), (1.6, 0.), (1.4, 0.2), (1.7, 1.)]), 6., 13.),
-             Item(Polygon([(0., 0.), (1.6, 3.), (2.8, 2.9), (1.5, 2.7), (1.9, 1.6)]), 11., 12.),
-             Item(Polygon([(0., 0.), (1.8, 1.5), (0., 2.8)]), 15., 25.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.2), (0., 0.2)]), 14., 10.),
-             Item(Polygon([(0., 0.), (2.5, 0.), (1.5, 0.2), (0., 0.2)]), 10., 12.),
-             Item(Polygon([(0., 0.), (1.6, 0.), (0.8, 0.45), (0.6, 0.7), (0., 0.45)]), 17., 8.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (0.8, 0.15), (0., 0.1)]), 13., 12.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (0.8, 0.15), (0., 0.1)]), 15., 7.),
-             Item(Ellipse((0., 0.), 0.5, 0.3), 15., 8.),
-             Item(Ellipse((0., 0.), 0.2, 0.8), 14., 21.),
-             Item(Circle((0., 0.), 0.2), 18., 18.),
-             Item(Circle((0., 0.), 0.6), 11., 12.),
-             Item(Circle((0., 0.), 0.35), 12., 9.)]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-
-    print_if_allowed(solution.add_item(0, (0.9, 2.02), 0.), can_print)
-    print_if_allowed(solution.add_item(3, (0.78, 0.12), 0.), can_print)
-    print_if_allowed(solution.add_item(4, (2.8, 0.12), 0.), can_print)
-    print_if_allowed(solution.add_item(5, (0.8, 3.85), 0.), can_print)
-    print_if_allowed(solution.add_item(6, (0.78, 0.3), 0.), can_print)
-    print_if_allowed(solution.add_item(7, (2.3, 2.57), 90.), can_print)
-    print_if_allowed(solution.add_item(8, (0.3, 2.98), 90.), can_print)
-    print_if_allowed(solution.add_item(9, (2.17, 1.05), 0.), can_print)
-    print_if_allowed(solution.add_item(10, (1.8, 0.45), 0.), can_print)
-    print_if_allowed(solution.add_item(11, (1.77, 4.38), 0.), can_print)
-    print_if_allowed(solution.add_item(12, (0.35, 4.63), 0.), can_print)
-"""
-    # Problem 7
-"""
-    max_weight = 122.
-    container_shape = Polygon([(3.5, 0.6), (0.5, 0.9), (3.7, 5.5), (1.7, 4.), (0., 6.5), (0.2, 8.6), (0.8, 9.8), (1.7, 8.9), (2, 9.1), (4.4, 9.3), (4.2, 6.7), (4.9, 7.5), (6.5, 8.4), (6.6, 7.9), (7.4, 8.2), (8.7, 5.5), (9.3, 4.8), (6.3, 0.2), (5., 3.5), (5, 0.7), (3.5, 0.6)])
-    container = Container(max_weight, container_shape)
-    items = [Item(Polygon([(0, 3), (0, 2.), (4., 0)]), 5., 6.),
-             Item(Polygon([(0, 0), (1., 2.), (2.5, 2), (1, 1.2)]), 10., 7.),
-             Item(Polygon([(0, 1), (1, 2.), (3., 0)]), 9., 4.),
-             Item(Polygon([(0, 0.5), (1, 1.), (3, 1), (2., 0)]), 19., 14.),
-             Item(Polygon([(0, 0.6), (2, 1), (2., 1.5), (1.2, 1.5)]), 19., 15.),
-             Item(Polygon([(0, 0), (0, 2.), (0.5, 2), (0.5, 0.5), (2.5, 0.5), (2.5, 0)]), 7., 15.),
-             Item(MultiPolygon([(((0.0, 0.0), (0.0, 1.8), (1.0, 2.7), (2.3, 0.0)),
-                                 [((0.2, 0.2), (0.2, 1.4), (0.7, 2.1), (1.8, 0.5))])]), 12., 6.),
-             Item(MultiPolygon([(((0.0, 0.0), (1.0, 1.8), (2.0, 2.5), (2.6, 0.7)),
-                                 [((0.2, 0.2), (1.2, 1.4), (2.1, 1.7))])]), 7., 13.),
-             Item(Ellipse((0, 0), 0.5, 0.2), 4., 9.),
-             Item(Ellipse((0, 0), 0.2, 1.5), 21., 14.),
-             Item(Ellipse((0, 0), 2.5, 3.5), 16., 30.),
-             Item(Circle((0, 0), 0.4), 7., 12.),
-             Item(Circle((0, 0), 0.3), 10., 3.),
-             Item(Circle((0, 0), 1.), 1., 3.)]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-
-    print_if_allowed(solution.add_item(0, (5.73, 3.02), 318.), can_print)
-    print_if_allowed(solution.add_item(1, (6.3, 4.1), 40.), can_print)
-    print_if_allowed(solution.add_item(2, (4.58, 2.5), 315.), can_print)
-    print_if_allowed(solution.add_item(3, (1.3, 5.4), 320.), can_print)
-    print_if_allowed(solution.add_item(4, (1.4, 1.7), 20.), can_print)
-    print_if_allowed(solution.add_item(5, (2.9, 7.9), 180.), can_print)
-    print_if_allowed(solution.add_item(6, (8.2, 4), 300.), can_print)
-    print_if_allowed(solution.add_item(7, (2.5, 7.4), 340.), can_print)
-    print_if_allowed(solution.add_item(8, (7.3, 4.), 320.), can_print)
-    print_if_allowed(solution.add_item(9, (2.9, 3.9), 330.), can_print)
-    print_if_allowed(solution.add_item(11, (7.8, 4.4), 0.), can_print)
-    print_if_allowed(solution.add_item(13, (6.2, 6.8), 0.), can_print)
-"""
-    # Problem 8
-"""
-    max_weight = 100.
-    container_shape = Polygon([(0., 0.), (0., 5.), (2.5, 3.4), (5., 5.), (5., 0), (2.5, 1.6)])
-    container = Container(max_weight, container_shape)
-    items = [Item(Polygon([(0., 0.), (0., 3.), (0.25, 3.), (0.25, 0.25), (2., 2.5), (3.75, 0.25), (3.75, 3.), (4., 3.), (4., 0.), (3.75, 0.), (2., 2.), (0.25, 0.)]), 100., 100.),
-             Item(Polygon([(0., 0.), (1.6, 1.), (1.8, 1.9), (0.9, 1.6)]), 11., 12.),
-             Item(Polygon([(0., 0.), (1.8, 2.5), (0., 1.8)]), 15., 5.),
-             Item(Polygon([(0., 0.), (0.5, 0.), (1.2, 0.4), (0., 0.5)]), 4., 10.),
-             Item(Polygon([(0., 0.), (2.5, 0.), (1.5, 0.2), (0., 0.5)]), 1., 2.),
-             Item(Polygon([(0., 0.), (0.7, 0.25), (1.6, 1.5), (0.6, 0.7), (0., 0.45)]), 17., 8.),
-             Item(Polygon([(0., 0.), (0.8, 0.5), (1.5, 1.2), (0., 0.5)]), 13., 11.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.2, 0.6), (0., 0.3)]), 15., 7.),
-             Item(Ellipse((0., 0.), 0.6, 0.4), 15., 8.),
-             Item(Ellipse((0., 0.), 2., 0.5), 15., 8.),
-             Item(Ellipse((0., 0.), 0.5, 0.3), 24., 6.),
-             Item(Ellipse((0., 0.), 0.4, 0.1), 4., 3.),
-             Item(Circle((0., 0.), 0.6), 11., 2.),
-             Item(Circle((0., 0.), 0.35), 12., 4.),
-             Item(Circle((0., 0.), 0.2), 18., 8.)]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-
-    print_if_allowed(solution.add_item(0, (2.5, 2.02), 0.), can_print)
-"""
-    # Problem 9
-"""
-    max_weight = 200.
-    container_shape = Point(5, 5).buffer(5, 3)
-    container = Container(max_weight, container_shape)
-    items = [Item(MultiPolygon([(Point(5, 5).buffer(4.7, 2).exterior.coords,
-                                 [((9., 5.), (5., 1.), (1., 5.), (5., 9.))])]), 120., 110.),
-             Item(Polygon([(0., 0.), (0., 5.), (5., 5.), (5., 0.)]), 50., 80.),
-             Item(Polygon([(1., 4.2), (1.5, 2.), (4., 0)]), 15., 14.),
-             Item(Polygon([(0, 0), (1., 2.), (2.5, 2), (1, 1.2)]), 11., 11.),
-             Item(Polygon([(0, 1), (1, 2.), (3., 0)]), 11., 4.),
-             Item(Polygon([(0, 0.5), (1, 1.), (3, 1), (2., 0)]), 19., 14.),
-             Item(Polygon([(0, 0.4), (1.8, .8), (1.5, 1.3), (1.2, 3.3)]), 17., 15.),
-             Item(Polygon([(0, 0), (0, 2.), (0.9, 2), (0.9, 0.5), (1.5, 0.5), (1.5, 0)]), 70., 15.),
-             Item(Ellipse((0, 0), 0.8, 1.2), 14., 13.),
-             Item(Ellipse((0, 0), 1.2, 1.5), 12., 6.),
-             Item(Ellipse((0, 0), 2.5, 1.7), 16., 10.),
-             Item(Circle((0, 0), 0.7), 17., 11.),
-             Item(Circle((0, 0), 0.8), 13., 10.),
-             Item(Circle((0, 0), 1.), 4., 4.),
-             Item(Circle((0, 0), 2.), 22., 8.)]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-
-    print_if_allowed(solution.add_item(0, (5., 5.), 0.), can_print)
-    print_if_allowed(solution.add_item(1, (5., 5.), 45.), can_print)
-"""
-    # Problem 10
-"""
-    max_weight = 150.
-    container_shape = Polygon([(2., 5.), (3., 5), (3., 3.), (5., 3.), (5., 2.), (3., 2.), (3., 0.), (2., 0.), (2., 2.), (0., 2.), (0., 3.), (2., 3.)])
-    container = Container(max_weight, container_shape)
-    items = [Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95)]), 10., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95)]), 10., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95)]), 10., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95)]), 10., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95)]), 10., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95)]), 10., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95)]), 10., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95)]), 10., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95)]), 10., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95)]), 10., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95), (0., 0.95)]), 20., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95), (0., 0.95)]), 20., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95), (0., 0.95)]), 20., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95), (0., 0.95)]), 20., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95), (0., 0.95)]), 20., 10.),
-             Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.95), (0., 0.95)]), 20., 10.),
-             Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.45), (0., 0.45)]), 20., 30.),
-             Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.45), (0., 0.45)]), 20., 30.),
-             Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.1), (0., 0.1)]), 5., 25.),
-             Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.1), (0., 0.1)]), 5., 25.)]
-    problem = Problem(container, items)
-    problems.append(problem)
-
-    solution = Solution(problem)
-    solutions.append(solution)
-
-    print_if_allowed(solution.add_item(0, (4.23, 2.48), 0.), can_print)
-    print_if_allowed(solution.add_item(1, (4.23, 2.52), 180.), can_print)
-    print_if_allowed(solution.add_item(2, (0.77, 2.48), 0.), can_print)
-    print_if_allowed(solution.add_item(3, (0.77, 2.52), 180.), can_print)
-    print_if_allowed(solution.add_item(4, (2.48, 0.76), 270.), can_print)
-    print_if_allowed(solution.add_item(5, (2.52, 0.76), 90.), can_print)
-    print_if_allowed(solution.add_item(6, (2.48, 4.24), 270.), can_print)
-    print_if_allowed(solution.add_item(7, (2.52, 4.24), 90.), can_print)
-    print_if_allowed(solution.add_item(8, (2.5, 2.48), 0.), can_print)
-    print_if_allowed(solution.add_item(9, (2.5, 2.52), 180.), can_print)
-    print_if_allowed(solution.add_item(16, (2.5, 3.25), 0.), can_print)
-    print_if_allowed(solution.add_item(17, (2.5, 1.75), 0.), can_print)
-    print_if_allowed(solution.add_item(18, (1.64, 2.5), 90.), can_print)
-    print_if_allowed(solution.add_item(19, (3.36, 2.5), 90.), can_print)
-"""
 
 
 def create_packing_problems_with_optimal_solution_values():
