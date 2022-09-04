@@ -10,11 +10,11 @@ import evolutionary
 import greedy
 import reversible
 import shape_functions
-from circle import Circle
+
 import cv2
 from common_algorithm_functions import get_time_since, visualize_boxplot_for_data_sequence, print_if_allowed, \
     visualize_plot, visualize_bar_plot, add_newlines_by_spaces, get_stats
-from ellipse import Ellipse
+
 from problem_solution import Item, Container, Problem, Solution
 
 # types of problems that can be solved: Knapsack-Packing Joint Problem, or Packing Problem
@@ -287,7 +287,7 @@ def perform_experiments(problem_type, output_dir, load_experiments):
                 # solve the problem with different algorithms, executing each one multiple times to gain statistical significance
                 #for (algorithm_name, algorithm) in [("Greedy", greedy.solve_problem), ("Reversible", reversible.solve_problem), ("Evolutionary", evolutionary.solve_problem)]:
 
-                for (algorithm_name, algorithm) in [("Greedy", greedy.solve_problem)]:
+                for (algorithm_name, algorithm) in [("Evolutionary", evolutionary.solve_problem)]:
 
                     solutions, values, value_evolutions, times, time_divisions = execute_algorithm(algorithm=algorithm, algorithm_name=algorithm_name, problem=problem, execution_num=execution_num, process_num=process_num, calculate_times=calculate_internal_times, calculate_fitness_stats=calculate_value_evolution)
                     experiment_dict[problem_name]["algorithms"][algorithm_name] = {"solutions": solutions, "values": values, "value_evolutions": value_evolutions, "times": times, "time_divisions": time_divisions}

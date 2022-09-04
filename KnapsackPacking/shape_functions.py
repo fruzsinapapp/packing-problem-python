@@ -3,22 +3,11 @@ import math
 import random
 import numpy as np
 from shapely.geometry import LinearRing, MultiPolygon, Point, Polygon, MultiPoint, MultiLineString
-from circle import Circle, VISUALIZATION_RESOLUTION
-from ellipse import Ellipse
-
 
 def get_bounds(shape):
 
     """Return a tuple with the (min_x, min_y, max_x, max_y) describing the bounding box of the shape"""
 
-    # the circle bounds can be found with the center and radius
-    if type(shape) == Circle:
-
-        return shape.center.x - shape.radius, shape.center.y - shape.radius,  shape.center.x + shape.radius, shape.center.y + shape.radius
-
-    # for an ellipse, use the approximate polygon
-    if type(shape) == Ellipse:
-        shape = shape.polygon
 
     return shape.bounds
 
@@ -27,15 +16,6 @@ def get_bounding_rectangle_center(shape):
 
     """Return the center of the bounding rectangle for the passed shape"""
 
-    # for a circle, use the center
-    if type(shape) == Circle:
-
-        return shape.center.x, shape.center.y
-
-    # for an ellipse, use the approximate polygon
-    if type(shape) == Ellipse:
-        shape = shape.polygon
-
     return (shape.bounds[0] + shape.bounds[2]) / 2, (shape.bounds[1] + shape.bounds[3]) / 2
 
 
@@ -43,14 +23,6 @@ def get_centroid(shape):
 
     """Return the centroid of a shape"""
 
-    # for a circle, use the center
-    if type(shape) == Circle:
-
-        return shape.center
-
-    # for an ellipse, use the approximate polygon
-    if type(shape) == Ellipse:
-        shape = shape.polygon
 
     return shape.centroid
 
@@ -67,19 +39,6 @@ def get_shape_exterior_points(shape, is_for_visualization=False):
 
         return shape.geoms[0].exterior.xy
 
-    # a circle has no finite exterior points, but for visualization a discrete set is generated
-    if type(shape) == Circle:
-
-        if is_for_visualization:
-
-            return shape.center.buffer(shape.radius, VISUALIZATION_RESOLUTION).exterior.xy
-
-        return None
-
-    # for the ellipse, always use the approximate polygon
-    if type(shape) == Ellipse:
-
-        return shape.polygon.exterior.xy
 
     return shape.exterior.xy
 
@@ -88,14 +47,6 @@ def do_shapes_intersect(shape0, shape1):
 
     """Return whether the two passed shapes intersect with one another"""
 
-    # non-native shape types need to be the ones calling intersection, to handle all cases
-    if type(shape0) == Circle or type(shape0) == Ellipse:
-
-        return shape0.intersects(shape1)
-
-    elif type(shape1) == Circle or type(shape1) == Ellipse:
-
-        return shape1.intersects(shape0)
 
     # default case for native-to-native shape test
     return shape0.intersects(shape1)
@@ -124,14 +75,6 @@ def get_intersection_points_between_shapes(shape0, shape1):
 
         shape1 = MultiLineString(shape1.boundary)
 
-    # non-native shape types use their approximate polygon boundaries
-    if type(shape0) == Circle or type(shape0) == Ellipse:
-
-        shape0 = shape0.polygon.exterior
-
-    if type(shape1) == Circle or type(shape1) == Ellipse:
-
-        shape1 = shape1.polygon.exterior
 
     intersection_result = shape0.intersection(shape1)
 
@@ -151,9 +94,6 @@ def does_shape_contain_other(container_shape, content_shape):
 
     """Return whether the first shape is a container of the second one, which in such case acts as the content of the first one"""
 
-    # Shapely core shapes do not know about circle or ellipse, so let them handle the check
-    if type(container_shape) == Circle or type(container_shape) == Ellipse:
-        return container_shape.contains(content_shape)
 
     # use the standard within check
     return content_shape.within(container_shape)
@@ -162,14 +102,6 @@ def does_shape_contain_other(container_shape, content_shape):
 def copy_shape(shape):
 
     """Create and return a deep copy of the passed shape"""
-
-    if type(shape) == Circle:
-
-        return Circle(shape.center, shape.radius)
-
-    if type(shape) == Ellipse:
-
-        return Ellipse(shape.center, shape.half_width, shape.half_height, shape.polygon)
 
     return copy.deepcopy(shape)
 

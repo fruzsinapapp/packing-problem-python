@@ -5,9 +5,8 @@ import random
 import time
 import numpy as np
 import greedy
-from circle import Circle
+
 from common_algorithm_functions import get_time_since
-from ellipse import Ellipse
 from shape_functions import get_bounds, create_random_polygon, do_shapes_intersect, \
     create_random_triangle_in_rectangle_corner, does_shape_contain_other, \
     create_random_quadrilateral_in_rectangle_corners
@@ -406,34 +405,21 @@ def get_crossover(parent0, parent1, max_attempt_num, shape_min_length_proportion
             
             # select a type of shape
             shape_index = random.choice(shape_indices)
-            
-            # create a circle
-            if shape_index == circle_index:
-                center = (random.uniform(min_x, max_x), random.uniform(min_y, max_y))
-                radius = random.choice([shape_x_length, shape_y_length]) * 0.5
-                shape = Circle(center, radius)
+
+            # randomly select the number of vertices for the polygon (at least 3 are needed, to have a triangle)
+            vertex_num = random.randint(3, polygon_max_vertex_num)
                 
-            # create an ellipsis
-            elif shape_index == ellipse_index:
-                center = (random.uniform(min_x, max_x), random.uniform(min_y, max_y))
-                shape = Ellipse(center, shape_x_length, shape_y_length)
-              
-            # create a polygon  
-            else:
-                # randomly select the number of vertices for the polygon (at least 3 are needed, to have a triangle)
-                vertex_num = random.randint(3, polygon_max_vertex_num)
+            # randomly select a center for the bounding rectangle of the polygon
+            polygon_bounds_center = (random.uniform(min_x, max_x), random.uniform(min_y, max_y))
                 
-                # randomly select a center for the bounding rectangle of the polygon
-                polygon_bounds_center = (random.uniform(min_x, max_x), random.uniform(min_y, max_y))
+            # determine the bounds of the polygon
+            polygon_min_x = polygon_bounds_center[0] - shape_x_length * 0.5
+            polygon_max_x = polygon_min_x + shape_x_length
+            polygon_min_y = polygon_bounds_center[1] - shape_y_length * 0.5
+            polygon_max_y = polygon_min_y + shape_y_length
                 
-                # determine the bounds of the polygon
-                polygon_min_x = polygon_bounds_center[0] - shape_x_length * 0.5
-                polygon_max_x = polygon_min_x + shape_x_length
-                polygon_min_y = polygon_bounds_center[1] - shape_y_length * 0.5
-                polygon_max_y = polygon_min_y + shape_y_length
-                
-                # create the polygon
-                shape = create_random_polygon(polygon_min_x, polygon_min_y, polygon_max_x, polygon_max_y, vertex_num)
+            # create the polygon
+            shape = create_random_polygon(polygon_min_x, polygon_min_y, polygon_max_x, polygon_max_y, vertex_num)
         
         # determine if the current shape is valid (it should have a minimum area and intersect with the container)
         has_valid_shape = shape is not None and shape.area >= shape_min_area and do_shapes_intersect(parent0.problem.container.shape, shape)

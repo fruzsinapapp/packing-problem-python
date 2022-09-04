@@ -53,41 +53,25 @@ class PlacedShape(object):
 
         self.position = new_position
 
-        # update the center for the circle or ellipse
-        if type(self.shape) == Circle or type(self.shape) == Ellipse:
-            self.shape.center = Point(new_position[0], new_position[1])
+
 
     def move(self, displacement, update_reference_position=True):
 
         """Move the shape as much as indicated by the displacement"""
 
-        # for the ellipse, apply the action to the approximate polygon
-        if type(self.shape) == Ellipse:
-            shape_to_move = self.shape.polygon
-
-        # otherwise move the shape itself
-        else:
-            shape_to_move = self.shape
+        shape_to_move = self.shape
 
         # only move when it makes sense
-        if displacement != (0., 0.) or (type(self.shape) == Ellipse and get_bounding_rectangle_center(shape_to_move) != self.shape.center):
+        if displacement != (0., 0.):
 
             shape_to_move = affinity.translate(shape_to_move, displacement[0], displacement[1])
 
-            if type(self.shape) == Ellipse:
-                self.shape.polygon = shape_to_move
-
-            else:
-                self.shape = shape_to_move
+            self.shape = shape_to_move
 
             if update_reference_position:
                 self.update_position((self.position[0] + displacement[0], self.position[1] + displacement[1]))
 
-        # for the circle, update the support approximate polygon
-        if type(self.shape) == Circle:
-            center_displacement = self.shape.center.x - self.shape.polygon.centroid.x, self.shape.center.y - self.shape.polygon.centroid.y
-            if center_displacement != (0, 0):
-                self.shape.polygon = affinity.translate(self.shape.polygon, center_displacement[0], center_displacement[1])
+
 
     def move_to(self, new_position):
 
@@ -100,25 +84,15 @@ class PlacedShape(object):
         """Rotate the shape around its reference position according to the passed rotation angle, expressed in degrees"""
 
         # only rotate when it makes sense
-        if not np.isnan(angle) and angle != 0 and (type(self.shape) != Circle or origin is not None):
+        if not np.isnan(angle) and angle != 0 and (origin is not None):
 
-            # for the ellipse, apply the action to the approximate polygon
-            if type(self.shape) == Ellipse:
-                shape_to_rotate = self.shape.polygon
-
-            # otherwise rotate the shape itself
-            else:
-                shape_to_rotate = self.shape
+            shape_to_rotate = self.shape
 
             if not origin:
                 origin = self.position
             shape_to_rotate = affinity.rotate(shape_to_rotate, angle, origin)
 
-            if type(self.shape) == Ellipse:
-                self.shape.polygon = shape_to_rotate
-
-            else:
-                self.shape = shape_to_rotate
+            self.shape = shape_to_rotate
 
             if update_reference_rotation:
                 self.rotation += angle
@@ -307,9 +281,6 @@ class Solution(object):
             # the weight of the item must not cause an exceed of the container's capacity
             if self.weight + item.weight <= self.problem.container.max_weight:
 
-                # if the item is a circle, rotation is not relevant
-                if not np.isnan(rotation) and type(item.shape) == Circle:
-                    rotation = np.nan
 
                 # temporarily insert the item in the container, before intersection checks
                 self._add_item(item_index, position, rotation)
