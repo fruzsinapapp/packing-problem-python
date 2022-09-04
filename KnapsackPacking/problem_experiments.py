@@ -28,13 +28,6 @@ KNAPSACK_PACKING_PROBLEM_DIR = "../Output/Problems/CustomKnapsackPacking/Compari
 PACKING_PROBLEM_DIR = "../Output/Problems/Packing/Comparison/"
 
 
-
-
-
-
-
-
-
 def _DFS(polygons, contours, hierarchy, sibling_id, is_outer, siblings):
     while sibling_id != -1:
         contour = contours[sibling_id].squeeze(axis=1)
@@ -45,14 +38,14 @@ def _DFS(polygons, contours, hierarchy, sibling_id, is_outer, siblings):
 
             if is_outer:
                 polygon = Polygon(contour, holes=children)
-                #multipol = MultiPolygon([polygon])
-                #print(multipol)
-                polygons.append(polygon)
+                multipol = MultiPolygon([polygon])
+                print(polygon)
+                #polygons.append(polygon)
+                polygons.append(multipol)
             else:
                 siblings.append(contour)
 
         sibling_id = hierarchy[sibling_id][0]
-
 
 def generate_polygons(contours, hierarchy):
     hierarchy = hierarchy[0]
@@ -66,37 +59,28 @@ def create_knapsack_packing_problems_with_manual_solutions(can_print=False):
     """Create a set of Knapsack-Packing problem instances that are solved (optimally) with manual placements (using actions available for all the algorithms); both the problems and solutions are returned"""
 
     problems, solutions = list(), list()
-
     start_time = time.time()
 
-
-
-    img = cv2.imread('test13.png', cv2.IMREAD_GRAYSCALE)
-
-
+    """Generate polygon from picture"""
+    img = cv2.imread('test14.png', cv2.IMREAD_GRAYSCALE)
     contours, hierarchy = cv2.findContours(img, cv2.RETR_LIST, cv2.CHAIN_APPROX_TC89_L1)
     #CHAIN_APPROX_SIMPLE
     #contours, hierarchy = cv2.findContours(img, cv2.RETR_TREE, cv2.CHAIN_APPROX_TC89_L1)
-
-
     polygons = generate_polygons(contours, hierarchy)
-    p = polygons[0]
+    #p = polygons[0]
+    p = polygons[1]
+
+    #0,1,2 ... --> lyuk
+    #utolsó --> forma
     print(type(p))
 
 
-    # Problem 2
-    max_weight = 150.
-    #container_shape = Polygon([(0., 0.), (5., 0.), (5., 5.), (0., 5.)])
-    #container_shape = Polygon([(0, 0), (300, 600.), (600., 0)])
-    #print(container_shape)
-
-
-
+    # Problem
+    # the capacity is set to infinite so that it never restricts placements; all items have value 1 so that the objective is to maximize the number of placed items
+    max_weight = np.inf
     container_shape = p
     print(p)
     container = Container(max_weight, container_shape)
-
-
 
     items = [Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
              Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
@@ -113,28 +97,19 @@ def create_knapsack_packing_problems_with_manual_solutions(can_print=False):
              Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
              Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
              Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
+             Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
              Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.)
-             #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
-             #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
-             #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
-             #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
-             #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
-             #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
-             #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
-             #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
-             #Item(Polygon([(0., 0.), (1.5, 0.), (1.5, 0.5), (0., 0.5)]), 1., 1.),
-             # Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.45), (0., 0.45)]), 20., 30.),
-             # Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.45), (0., 0.45)]), 20., 30.),
-             # Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.1), (0., 0.1)]), 5., 25.),
-             # Item(Polygon([(0., 0.), (0.8, 0.), (0.8, 0.1), (0., 0.1)]), 5., 25.)
              ]
     problem = Problem(container, items)
     problems.append(problem)
 
     solution = Solution(problem)
     solutions.append(solution)
-
-
     elapsed_time = get_time_since(start_time)
     print_if_allowed("Manual elapsed time: {} ms".format(round(elapsed_time, 3)), can_print)
 
@@ -146,19 +121,6 @@ def create_packing_problems_with_optimal_solution_values():
     """Create a set of Packing problem instances, returned along with the externally calculated optimal solution values (not the full solutions with their placements)"""
 
     problems, problem_names, optimal_values = list(), list(), list()
-
-    # the capacity is set to infinite so that it never restricts placements; all items have value 1 so that the objective is to maximize the number of placed items
-    max_weight = np.inf
-
-    # Squares in square; Wolfram Alpha query: "pack 100 squares of side 4 in a square of side 58"; full link: https://www.wolframalpha.com/input/?i=pack+100+squares+of+side+4+in+a+square+of+side+58
-    container_shape = shape_functions.create_square((22.5, 22.5), 58)
-    container = Container(max_weight, container_shape)
-    item_num = 100
-    items = [Item(shape_functions.create_square((0, 0), 4), 1., 1.)] * item_num
-    problem = Problem(container, items)
-    problems.append(problem)
-    problem_names.append("Squares in square")
-    optimal_values.append(item_num)
 
     return problems, problem_names, optimal_values
 
@@ -287,7 +249,7 @@ def perform_experiments(problem_type, output_dir, load_experiments):
                 # solve the problem with different algorithms, executing each one multiple times to gain statistical significance
                 #for (algorithm_name, algorithm) in [("Greedy", greedy.solve_problem), ("Reversible", reversible.solve_problem), ("Evolutionary", evolutionary.solve_problem)]:
 
-                for (algorithm_name, algorithm) in [("Evolutionary", evolutionary.solve_problem)]:
+                for (algorithm_name, algorithm) in [("Greedy", greedy.solve_problem)]:
 
                     solutions, values, value_evolutions, times, time_divisions = execute_algorithm(algorithm=algorithm, algorithm_name=algorithm_name, problem=problem, execution_num=execution_num, process_num=process_num, calculate_times=calculate_internal_times, calculate_fitness_stats=calculate_value_evolution)
                     experiment_dict[problem_name]["algorithms"][algorithm_name] = {"solutions": solutions, "values": values, "value_evolutions": value_evolutions, "times": times, "time_divisions": time_divisions}
