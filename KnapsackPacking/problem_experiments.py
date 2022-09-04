@@ -39,7 +39,7 @@ def _DFS(polygons, contours, hierarchy, sibling_id, is_outer, siblings):
             if is_outer:
                 polygon = Polygon(contour, holes=children)
                 multipol = MultiPolygon([polygon])
-                print(polygon)
+                #print(polygon)
                 #polygons.append(polygon)
                 polygons.append(multipol)
             else:
@@ -62,24 +62,24 @@ def create_knapsack_packing_problems_with_manual_solutions(can_print=False):
     start_time = time.time()
 
     """Generate polygon from picture"""
-    img = cv2.imread('test14.png', cv2.IMREAD_GRAYSCALE)
+    img = cv2.imread('test13.png', cv2.IMREAD_GRAYSCALE)
     contours, hierarchy = cv2.findContours(img, cv2.RETR_LIST, cv2.CHAIN_APPROX_TC89_L1)
     #CHAIN_APPROX_SIMPLE
     #contours, hierarchy = cv2.findContours(img, cv2.RETR_TREE, cv2.CHAIN_APPROX_TC89_L1)
     polygons = generate_polygons(contours, hierarchy)
-    #p = polygons[0]
-    p = polygons[1]
+    p = polygons[0]
+    #p = polygons[1]
 
     #0,1,2 ... --> lyuk
     #utolsó --> forma
-    print(type(p))
+    #print(type(p))
 
 
     # Problem
     # the capacity is set to infinite so that it never restricts placements; all items have value 1 so that the objective is to maximize the number of placed items
     max_weight = np.inf
     container_shape = p
-    print(p)
+    #print(p)
     container = Container(max_weight, container_shape)
 
     items = [Item(Polygon([(0., 0.), (20., 0.), (20., 40.), (0., 40.)]), 1., 1.),
@@ -180,34 +180,16 @@ def execute_algorithm(algorithm, algorithm_name, problem, show_solution_plot=Fal
 
     solutions, values, value_evolutions, times, time_divisions = list(), list(), list(), list(), list()
 
-    # if possible, perform each execution in a separate CPU process (in parallel)
-    if process_num > 1:
+    for i in range(execution_num):
 
-        process_pool = Pool(process_num)
-        batch_num = ceil(execution_num / process_num)
-        for batch in range(batch_num):
-            results = process_pool.map(execute_algorithm_with_params, param_tuples[batch * process_num: batch * process_num + process_num])
-            batch_solutions, batch_values, batch_value_evolutions, batch_times, batch_time_divisions = [result[0] for result in results], [result[1] for result in results], [result[2] for result in results], [result[3] for result in results], [result[4] for result in results]
-            solutions.extend(batch_solutions)
-            values.extend(batch_values)
-            value_evolutions.extend(batch_value_evolutions)
-            times.extend(batch_times)
-            time_divisions.extend(batch_time_divisions)
-            '''process_pool.terminate()
-            process_pool.join()'''
+        solution, value, value_evolution, elapsed_time, time_division = execute_algorithm_with_params(param_tuples[i])
+        solutions.append(solution)
+        values.append(value)
+        value_evolutions.append(value_evolution)
+        times.append(elapsed_time)
+        time_divisions.append(time_division)
 
-    # perform the calculation sequentially if multi-processing is not allowed
-    else:
-
-        for i in range(execution_num):
-
-            solution, value, value_evolution, elapsed_time, time_division = execute_algorithm_with_params(param_tuples[i])
-            solutions.append(solution)
-            values.append(value)
-            value_evolutions.append(value_evolution)
-            times.append(elapsed_time)
-            time_divisions.append(time_division)
-
+    print(solutions)
     return solutions, values, value_evolutions, times, time_divisions
 
 
@@ -271,7 +253,7 @@ def perform_experiments(problem_type, output_dir, load_experiments):
         show_problem_stats = False
         save_problem_stats = False  # True
         show_manual_solution_plots = False
-        save_manual_solution_plots = True  # True
+        save_manual_solution_plots = False  # True
         show_algorithm_solution_plots = False
         save_algorithm_solution_plots = True  # True
         show_value_evolution_plots = False

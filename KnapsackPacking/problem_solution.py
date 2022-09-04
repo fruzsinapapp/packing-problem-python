@@ -754,6 +754,8 @@ class Solution(object):
         worst_profit_color = (1, 0.8, 0.8)
         color_interp = interpolate.interp1d([min_profit_ratio, max_profit_ratio], [0, 1])
 
+
+        """
         # if possible, add a color-bar showing the value/weight ratio scale
         if show_value_weight_ratio_bar:
             fig.subplots_adjust(bottom=0.15)
@@ -769,10 +771,17 @@ class Solution(object):
             bar = colorbar.ColorbarBase(bar_ax, cmap=color_map, norm=norm, ticks=ticks, orientation='horizontal', ticklocation="bottom")
             bar.set_label(label="value/weight ratio", size=13)
             bar.ax.tick_params(labelsize=11)
+        """
+        #get position of placed items:
+        for k in self.placed_items.keys():
+            print(self.placed_items[k].position)
+
+
 
         for item_index, item in self.problem.items.items():
 
             # represent the placed items
+
             if item_index in self.placed_items:
 
                 if color_items_by_profit_ratio:
